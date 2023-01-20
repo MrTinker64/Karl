@@ -17,7 +17,7 @@ public class DriveSubsystem extends SubsystemBase {
   WPI_VictorSPX leftFront = new WPI_VictorSPX(0);
   WPI_VictorSPX leftRear = new WPI_VictorSPX(1);
   // The motors on the left side of the drive.
-  MotorControllerGroup m_leftMotors = new MotorControllerGroup(leftFront, leftRear);
+  private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(leftFront, leftRear);
   // The motors on the right side of the drive.
   private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(
       new PWMSparkMax(DriveConstants.kRightMotor1Port),
