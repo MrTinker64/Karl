@@ -15,13 +15,15 @@ import frc.robot.Constants.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
   // Define Victors
   WPI_VictorSPX leftFront = new WPI_VictorSPX(0);
-  WPI_VictorSPX leftRear = new WPI_VictorSPX(1);
+  WPI_VictorSPX rightFront = new WPI_VictorSPX(1);
+  PWMSparkMax leftRear = new PWMSparkMax(DriveConstants.kLeftMotor2Port);
+  PWMSparkMax rightRear = new PWMSparkMax(DriveConstants.kRightMotor2Port);
   // The motors on the left side of the drive.
   private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(leftFront, leftRear);
   // The motors on the right side of the drive.
   private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(
-      new PWMSparkMax(DriveConstants.kRightMotor1Port),
-      new PWMSparkMax(DriveConstants.kRightMotor2Port));
+      rightFront,
+      rightRear);
 
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_rightMotors, m_leftMotors);
