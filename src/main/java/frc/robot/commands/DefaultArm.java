@@ -12,18 +12,18 @@ public class DefaultArm extends CommandBase {
     private final ArmSubsystem m_arm;
     private final Trigger m_x;
     private final Trigger m_a;
-    private final int m_pov;
+    private final Trigger m_b;
 
     /**
      * Creates a new DefaultDrive.
      *
      * @param subsystem The drive subsystem this command wil run on.
      */
-    public DefaultArm(ArmSubsystem subsystem, Trigger x, Trigger a, int pov) {
+    public DefaultArm(ArmSubsystem subsystem, Trigger x, Trigger a, Trigger b) {
         m_arm = subsystem;
         m_x = x;
         m_a = a;
-        m_pov = pov;
+        m_b = b;
         addRequirements(m_arm);
     }
 
@@ -35,20 +35,19 @@ public class DefaultArm extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (m_pov == 0) {
+        if (m_b.getAsBoolean()) {
             m_arm.raiseArm();
-        } else if (m_pov == 180) {
-            m_arm.lowerArm();
         } else {
-            m_arm.idleArm();
-        }
-
-        if (m_x.getAsBoolean()) {
-            m_arm.cubeInConeOut();
-        } else if (m_a.getAsBoolean()) {
-            m_arm.coneInCubeOut();  
-        } else {
-            m_arm.holdPiece();
+            if (m_x.getAsBoolean()) {
+                m_arm.cubeInConeOut();
+                m_arm.lowerArm();
+            } else if (m_a.getAsBoolean()) {
+                m_arm.coneInCubeOut();
+                m_arm.lowerArm();
+            } else {
+                m_arm.holdPiece();
+                m_arm.idleArm();
+            }
         }
     }
 

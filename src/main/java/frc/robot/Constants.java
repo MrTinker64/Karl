@@ -64,8 +64,6 @@ public final class Constants {
 
     public static double intakePower;
     public static int intakeAmps;
-
-    public static int kPOV;
   }
   
   public static final class AutoConstants {
