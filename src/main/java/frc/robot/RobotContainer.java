@@ -5,8 +5,10 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.ArmConstants;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.HalfDriveSpeed;
+import frc.robot.commands.POV;
 import frc.robot.commands.DefaultArm;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -51,8 +53,11 @@ public class RobotContainer {
             
     // Set the default arm command
     m_robotArm.setDefaultCommand(
-      new DefaultArm(
-        m_robotArm, m_driverController.x(), m_driverController.a()));
+        new DefaultArm(
+            m_robotArm, 
+            m_driverController.x(), 
+            m_driverController.a(),
+            ArmConstants.kPOV));
   }
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
@@ -75,5 +80,9 @@ public class RobotContainer {
     // While holding the right shoulder button, drive at half speed
     new Trigger(m_driverController.leftBumper())
         .whileTrue(new HalfDriveSpeed());
+
+    m_driverController.pov(0).whileTrue(new POV(0));
+    m_driverController.pov(180).whileTrue(new POV(180));
+    m_driverController.pov(-1).whileTrue(new POV(-1));
   }
 }
