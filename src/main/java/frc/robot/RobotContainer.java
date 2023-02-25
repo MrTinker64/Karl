@@ -55,7 +55,8 @@ public class RobotContainer {
             m_robotArm, 
             m_driverController.x(), 
             m_driverController.a(),
-            m_driverController.b()));
+            m_driverController.b(),
+            m_driverController.y()));
   }
   /**
    * Use this method to define your trigger->command mappings. Triggers can be

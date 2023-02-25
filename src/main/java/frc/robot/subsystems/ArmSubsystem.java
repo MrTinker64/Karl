@@ -23,7 +23,7 @@ public class ArmSubsystem extends SubsystemBase {
      * If either one is reversed, change that here too. Arm out is defined
      * as positive, arm in is negative.
      */
-    arm.setInverted(true);
+    arm.setInverted(false);
     arm.setIdleMode(IdleMode.kBrake);
     arm.setSmartCurrentLimit(ArmConstants.ARM_CURRENT_LIMIT_A);
     intake.setInverted(false);
